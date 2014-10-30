@@ -20,7 +20,7 @@ namespace FiledRecipes.Views
             Console.WriteLine();
             Console.WriteLine("Ingredienser");
             Console.WriteLine("============");
-            foreach (Ingredient ingredient in recipe.Ingredients) 
+            foreach (IIngredient ingredient in recipe.Ingredients) 
             {
                 Console.WriteLine(ingredient.ToString());
             }
@@ -38,29 +38,9 @@ namespace FiledRecipes.Views
 
         public void Show(IEnumerable<IRecipe> recipes)
         {            
-            foreach (Recipe recipe in recipes) 
+            foreach (IRecipe recipe in recipes) 
             {
-                Console.Clear();
-                Header = recipe.Name;
-                ShowHeaderPanel();
-                
-                Console.WriteLine();
-                Console.WriteLine("Ingredienser");
-                Console.WriteLine("============");
-                foreach (Ingredient ingredient in recipe.Ingredients)
-                {
-                    Console.WriteLine(ingredient.ToString()); 
-                }
-                int number = 0;
-                Console.WriteLine();
-                Console.WriteLine("Gör så här");
-                Console.WriteLine("==========");
-                foreach (string instruktion in recipe.Instructions)
-                {
-                    number++;
-                    Console.WriteLine(string.Format("<{0}>", number));
-                    Console.WriteLine(instruktion); 
-                }
+                Show(recipe);
                 ContinueOnKeyPressed();
             }                     
         }
